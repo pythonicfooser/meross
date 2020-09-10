@@ -3,10 +3,9 @@ node {
         checkout scm
     }
     stage('Build Docker image'){
-        def merossImage = docker.build("meross:${env.BUILD_ID}")
+        def merossImage = docker.build("meross:${env.BRANCH_NAME}")
     }
     stage('Run Docker image'){
-        sh 'echo "Test webhook"'
-        sh 'docker run -d --rm meross:$BUILD_ID'
+        sh 'docker run -d --rm meross:$BRANCH_NAME'
     }
 }
